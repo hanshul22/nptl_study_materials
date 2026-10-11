@@ -5,6 +5,7 @@ coverage
 
 # env files (.env.example stays tracked)
 .env
+.env.local
 .env.*.local
 
 # runtime data (pdf/, tmp/, exports/); keep the folder via .gitkeep
