@@ -1,0 +1,14 @@
+node_modules
+dist
+*.tsbuildinfo
+coverage
+
+# env files (.env.example stays tracked)
+.env
+.env.*.local
+
+# runtime data (pdf/, tmp/, exports/); keep the folder via .gitkeep
+/data/*
+!/data/.gitkeep
+
+doc/

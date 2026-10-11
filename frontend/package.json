@@ -1,0 +1,15 @@
+{
+  "name": "@study/frontend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@study/shared": "*"
+  }
+}
