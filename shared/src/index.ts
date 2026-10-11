@@ -1,2 +1,9 @@
-// Placeholder until S0.2 adds the zod schemas from dtos.md. Replace, do not keep.
-export const SHARED_READY = true;
+export * from './schemas/primitives.js';
+export * from './schemas/topics.js';
+export * from './schemas/documents.js';
+export * from './schemas/notes.js';
+export * from './schemas/mcq.js';
+export * from './schemas/ai.js';
+export * from './schemas/settings.js';
+export * from './schemas/errors.js';
+export * from './endpoints.js';
