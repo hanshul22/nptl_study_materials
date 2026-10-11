@@ -7,7 +7,10 @@ export const QuickNoteCreate = z.object({
 });
 export type QuickNoteCreate = z.infer<typeof QuickNoteCreate>;
 
-export const QuickNoteUpdate = QuickNoteCreate.partial();
+// No default on content: a title-only PATCH must not reset the stored content to ''.
+export const QuickNoteUpdate = QuickNoteCreate.extend({
+  content: z.string().max(50_000),
+}).partial();
 export type QuickNoteUpdate = z.infer<typeof QuickNoteUpdate>;
 
 export const QuickNote = z.object({

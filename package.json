@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "npm run build -w @study/shared && npm run build -w @study/backend && npm run build -w @study/frontend",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
