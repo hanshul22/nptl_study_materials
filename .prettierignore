@@ -4,3 +4,4 @@ coverage
 data
 doc
 package-lock.json
+frontend/public/mockServiceWorker.js
