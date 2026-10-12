@@ -44,7 +44,11 @@ export const topicsRepository = {
 
   async update(ownerId: string, id: string, patch: TopicPatch): Promise<TopicDoc | null> {
     try {
-      return await TopicModel.findOneAndUpdate({ _id: id, ownerId }, { $set: patch }, { new: true })
+      return await TopicModel.findOneAndUpdate(
+        { _id: id, ownerId },
+        { $set: patch },
+        { returnDocument: 'after' },
+      )
         .lean()
         .exec();
     } catch (err) {

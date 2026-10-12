@@ -13,7 +13,11 @@ export const settingsRepository = {
    * ponytail: two first-ever PATCHes racing could hit the unique index (11000); one user, so unhandled.
    */
   upsert(ownerId: string, patch: SettingsUpdate): Promise<SettingsDoc> {
-    return SettingsModel.findOneAndUpdate({ ownerId }, { $set: patch }, { upsert: true, new: true })
+    return SettingsModel.findOneAndUpdate(
+      { ownerId },
+      { $set: patch },
+      { upsert: true, returnDocument: 'after' },
+    )
       .lean()
       .orFail()
       .exec();
