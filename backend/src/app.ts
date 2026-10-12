@@ -3,6 +3,7 @@ import express, { type Express } from 'express';
 import helmet from 'helmet';
 import type { Logger } from 'pino';
 import type { Config } from './config/env.js';
+import { errorHandler } from './middleware/errorHandler.js';
 import { notFound } from './middleware/notFound.js';
 import { owner } from './middleware/owner.js';
 import { generalRateLimiter } from './middleware/rateLimit.js';
@@ -32,6 +33,7 @@ export function createApp(config: Config, options: { logger?: Logger } = {}): Ex
   });
 
   app.use(notFound);
+  app.use(errorHandler);
 
   return app;
 }
