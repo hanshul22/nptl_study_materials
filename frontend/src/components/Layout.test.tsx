@@ -14,6 +14,7 @@ function renderAt(path: string) {
         <Route element={<Layout />}>
           <Route path="/" element={<p>Topics content</p>} />
           <Route path="/settings" element={<p>Settings content</p>} />
+          <Route path="/topics/:topicId/:tab?" element={<p>Topic content</p>} />
           <Route path="/broken" element={<Boom />} />
         </Route>
       </Routes>
@@ -46,6 +47,21 @@ it('marks only the current nav link as active', () => {
   renderAt('/settings');
   expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('aria-current', 'page');
   expect(screen.getByRole('link', { name: 'Topics' })).not.toHaveAttribute('aria-current');
+});
+
+it('marks Topics as the current page at "/"', () => {
+  renderAt('/');
+  expect(screen.getByRole('link', { name: 'Topics' })).toHaveAttribute('aria-current', 'page');
+  expect(screen.getByRole('link', { name: 'Settings' })).not.toHaveAttribute('aria-current');
+});
+
+it('keeps Topics active (as the section, not the page) on a topic page', () => {
+  renderAt('/topics/65a1f0c2e4b0a1b2c3d4e5f1/pdfs');
+  expect(screen.getByRole('main')).toHaveTextContent('Topic content');
+  const topics = screen.getByRole('link', { name: 'Topics' });
+  expect(topics).toHaveAttribute('aria-current', 'true');
+  expect(topics).toHaveClass('bg-indigo-100');
+  expect(screen.getByRole('link', { name: 'Settings' })).not.toHaveAttribute('aria-current');
 });
 
 it('has a skip link that targets the main landmark', () => {

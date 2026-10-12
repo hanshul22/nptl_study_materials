@@ -10,6 +10,7 @@ import {
 } from '../components';
 import { TopicCard } from './TopicCard';
 import { TopicForm } from './TopicForm';
+import { TopicsLoadError } from './TopicsLoadError';
 
 const buttonClass =
   'rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600';
@@ -58,19 +59,7 @@ export function TopicsPage() {
         </ul>
       );
   } else if (topics.isError) {
-    content = (
-      <div role="alert">
-        <EmptyState
-          title="Could not load topics"
-          description={toastMessageFromError(topics.error)}
-          action={
-            <button type="button" onClick={() => void topics.refetch()} className={buttonClass}>
-              Retry
-            </button>
-          }
-        />
-      </div>
-    );
+    content = <TopicsLoadError error={topics.error} onRetry={() => void topics.refetch()} />;
   } else {
     content = <LoadingState />;
   }

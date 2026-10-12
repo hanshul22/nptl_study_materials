@@ -10,6 +10,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export function Layout() {
   const { pathname } = useLocation();
+  const onTopicPage = pathname.startsWith('/topics/');
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -27,9 +28,14 @@ export function Layout() {
           <nav aria-label="Main">
             <ul className="flex items-center gap-1">
               <li>
-                <NavLink to="/" end className={navLinkClass}>
+                {/* Not a NavLink: it must also be active on /topics/*, which NavLink cannot express. */}
+                <Link
+                  to="/"
+                  aria-current={pathname === '/' ? 'page' : onTopicPage ? 'true' : undefined}
+                  className={navLinkClass({ isActive: pathname === '/' || onTopicPage })}
+                >
                   Topics
-                </NavLink>
+                </Link>
               </li>
               <li>
                 <NavLink to="/settings" className={navLinkClass}>
