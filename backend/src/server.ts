@@ -1,4 +1,6 @@
-import { ObjectIdStr } from '@study/shared';
+import { createApp } from './app.js';
+import { config } from './config/index.js';
 
-// Placeholder proving the @study/shared import resolves. B1.1 replaces this with the real server.
-export const isObjectId = (v: unknown): boolean => ObjectIdStr.safeParse(v).success;
+createApp(config).listen(config.PORT, () => {
+  console.log(`API listening on port ${config.PORT}`);
+});
