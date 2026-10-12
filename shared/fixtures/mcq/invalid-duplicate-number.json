@@ -1,0 +1,17 @@
+{
+  "title": "Duplicate number",
+  "questions": [
+    {
+      "number": 2,
+      "question": "First question numbered 2?",
+      "options": { "A": "Yes", "B": "No" },
+      "answer": "A"
+    },
+    {
+      "number": 2,
+      "question": "Second question also numbered 2?",
+      "options": { "A": "Yes", "B": "No" },
+      "answer": "B"
+    }
+  ]
+}

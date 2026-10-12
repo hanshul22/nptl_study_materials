@@ -1,0 +1,18 @@
+{
+  "title": "Max options",
+  "questions": [
+    {
+      "number": 1,
+      "question": "Which of these is the sixth option?",
+      "options": {
+        "A": "First",
+        "B": "Second",
+        "C": "Third",
+        "D": "Fourth",
+        "E": "Fifth",
+        "F": "Sixth"
+      },
+      "answer": "F"
+    }
+  ]
+}

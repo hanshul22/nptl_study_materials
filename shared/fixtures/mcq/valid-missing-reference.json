@@ -1,0 +1,15 @@
+{
+  "title": "Missing reference",
+  "questions": [
+    {
+      "number": 1,
+      "question": "This question points at a PDF that is not uploaded.",
+      "options": {
+        "A": "Yes",
+        "B": "No"
+      },
+      "answer": "A",
+      "reference": { "filename": "Missing.pdf", "page": 3 }
+    }
+  ]
+}

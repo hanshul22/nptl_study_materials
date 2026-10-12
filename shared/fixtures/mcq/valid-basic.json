@@ -1,0 +1,63 @@
+{
+  "topic": "Operating Systems",
+  "title": "Scheduling MCQs - Set 1",
+  "questions": [
+    {
+      "number": 1,
+      "question": "Which scheduling algorithm can cause starvation?",
+      "options": {
+        "A": "Round Robin",
+        "B": "FCFS",
+        "C": "Priority Scheduling",
+        "D": "None of these"
+      },
+      "answer": "C",
+      "explanation": "Low-priority processes may wait indefinitely.",
+      "reference": { "filename": "OS-Notes.pdf", "page": 14 }
+    },
+    {
+      "number": 2,
+      "question": "Round Robin scheduling is preemptive.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A",
+      "reference": { "filename": "OS-Notes.pdf", "page": 20 }
+    },
+    {
+      "number": 3,
+      "question": "Which of the following is NOT a CPU scheduling criterion?",
+      "options": {
+        "A": "Throughput",
+        "B": "Turnaround time",
+        "C": "Page fault rate",
+        "D": "Waiting time"
+      },
+      "answer": null,
+      "explanation": null
+    },
+    {
+      "number": 4,
+      "question": "Which algorithm gives the minimum average waiting time for a set of processes with known burst times?",
+      "options": {
+        "A": "FCFS",
+        "B": "Shortest Job First",
+        "C": "Round Robin",
+        "D": "Priority Scheduling"
+      },
+      "answer": "B",
+      "reference": { "filename": "OS-Notes.pdf", "page": 31 }
+    },
+    {
+      "number": 5,
+      "question": "FCFS scheduling suffers from the convoy effect.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A",
+      "reference": { "filename": "OS-Notes.pdf" }
+    }
+  ]
+}

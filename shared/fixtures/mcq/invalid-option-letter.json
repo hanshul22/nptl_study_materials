@@ -1,0 +1,11 @@
+{
+  "title": "Option letter outside A-F",
+  "questions": [
+    {
+      "number": 1,
+      "question": "A question with an option keyed G?",
+      "options": { "A": "First", "B": "Second", "G": "Not a valid letter" },
+      "answer": "A"
+    }
+  ]
+}

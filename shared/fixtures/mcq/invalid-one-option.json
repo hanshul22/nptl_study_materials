@@ -1,0 +1,16 @@
+{
+  "title": "One option",
+  "questions": [
+    {
+      "number": 1,
+      "question": "A normal question?",
+      "options": { "A": "Yes", "B": "No" },
+      "answer": "A"
+    },
+    {
+      "number": 2,
+      "question": "A question with only one option?",
+      "options": { "A": "Only choice" }
+    }
+  ]
+}

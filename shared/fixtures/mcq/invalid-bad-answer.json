@@ -1,0 +1,29 @@
+{
+  "title": "Bad answer",
+  "questions": [
+    {
+      "number": 1,
+      "question": "Question one?",
+      "options": { "A": "a", "B": "b", "C": "c", "D": "d" },
+      "answer": "A"
+    },
+    {
+      "number": 2,
+      "question": "Question two?",
+      "options": { "A": "a", "B": "b", "C": "c", "D": "d" },
+      "answer": "B"
+    },
+    {
+      "number": 3,
+      "question": "Question three?",
+      "options": { "A": "a", "B": "b", "C": "c", "D": "d" },
+      "answer": "C"
+    },
+    {
+      "number": 4,
+      "question": "Question four has an answer that is not one of its options?",
+      "options": { "A": "a", "B": "b", "C": "c", "D": "d" },
+      "answer": "E"
+    }
+  ]
+}
