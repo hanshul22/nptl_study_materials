@@ -1,4 +1,5 @@
 import { Route, Routes, useParams } from 'react-router-dom';
+import { Layout } from './components';
 
 // Placeholders only. F1.4 to F1.6 replace these with the layout and real pages.
 function Topics() {
@@ -17,10 +18,12 @@ function Topic() {
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Topics />} />
-      <Route path="/topics/:topicId/:tab?" element={<Topic />} />
-      <Route path="/settings" element={<p>Settings placeholder</p>} />
-      <Route path="*" element={<p>Page not found</p>} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<Topics />} />
+        <Route path="/topics/:topicId/:tab?" element={<Topic />} />
+        <Route path="/settings" element={<p>Settings placeholder</p>} />
+        <Route path="*" element={<p>Page not found</p>} />
+      </Route>
     </Routes>
   );
 }
