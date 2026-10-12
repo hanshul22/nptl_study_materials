@@ -7,6 +7,7 @@ import {
   ItemAskRequest,
   ItemAskResponse,
   ItemRef,
+  ItemThreadQuery,
   Source,
   ThreadMessage,
   ThreadResponse,
@@ -183,5 +184,44 @@ describe('ThreadMessage, ItemAskResponse, ThreadResponse', () => {
   it('ThreadResponse rejects a missing threadId or bad messages', () => {
     bad(ThreadResponse, { messages: [] });
     bad(ThreadResponse, { threadId: ID, messages: [{ role: 'user' }] });
+  });
+});
+
+describe('ItemThreadQuery', () => {
+  it('accepts an mcq query and coerces number from a string', () => {
+    expect(ItemThreadQuery.parse({ type: 'mcq', setId: ID, number: '3' })).toEqual({
+      type: 'mcq',
+      setId: ID,
+      number: 3,
+    });
+    ok(ItemThreadQuery, { type: 'mcq', setId: ID, number: 3 });
+  });
+  it('accepts a quickNote query', () => {
+    ok(ItemThreadQuery, { type: 'quickNote', noteId: ID });
+  });
+  it('rejects an mcq query without setId or number, or with a bad number', () => {
+    bad(ItemThreadQuery, { type: 'mcq', number: '3' });
+    bad(ItemThreadQuery, { type: 'mcq', setId: ID });
+    bad(ItemThreadQuery, { type: 'mcq', setId: ID, number: '0' });
+    bad(ItemThreadQuery, { type: 'mcq', setId: ID, number: 'abc' });
+    bad(ItemThreadQuery, { type: 'mcq', setId: ID, number: '' });
+    bad(ItemThreadQuery, { type: 'mcq', setId: ID, number: '1.5' });
+  });
+  it('rejects a quickNote query without noteId', () => {
+    bad(ItemThreadQuery, { type: 'quickNote' });
+  });
+  it("rejects the other variant's key (strict)", () => {
+    bad(ItemThreadQuery, { type: 'mcq', setId: ID, number: '1', noteId: ID });
+    bad(ItemThreadQuery, { type: 'mcq', noteId: ID });
+    bad(ItemThreadQuery, { type: 'quickNote', noteId: ID, setId: ID });
+    bad(ItemThreadQuery, { type: 'quickNote', setId: ID });
+  });
+  it('rejects unknown type, extra keys, and malformed ObjectIds', () => {
+    bad(ItemThreadQuery, { type: 'document', noteId: ID });
+    bad(ItemThreadQuery, {});
+    bad(ItemThreadQuery, { type: 'quickNote', noteId: ID, extra: 'x' });
+    bad(ItemThreadQuery, { type: 'mcq', setId: ID, number: '1', extra: 'x' });
+    bad(ItemThreadQuery, { type: 'mcq', setId: 'nope', number: '1' });
+    bad(ItemThreadQuery, { type: 'quickNote', noteId: 'nope' });
   });
 });

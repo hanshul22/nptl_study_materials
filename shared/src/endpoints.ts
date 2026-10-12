@@ -4,6 +4,7 @@ import {
   AskResponse,
   ItemAskRequest,
   ItemAskResponse,
+  ItemThreadQuery,
   ThreadResponse,
 } from './schemas/ai.js';
 import { DocumentDto } from './schemas/documents.js';
@@ -18,15 +19,16 @@ export interface EndpointDef {
   path: string;
   /** Success HTTP status. */
   status: number;
-  /** JSON request body schema. Absent for no body, multipart uploads, and query-only requests. */
+  /** JSON request body schema. Absent for no body and multipart uploads. */
   request?: z.ZodType;
+  /** Query string schema, when the endpoint reads one. */
+  query?: z.ZodType;
   /** JSON response schema. Absent for 204 and binary (PDF) responses. */
   response?: z.ZodType;
 }
 
-// dtos.md section 11. Not covered by a schema: the multipart `file` upload, the PDF streams
-// (`/documents/:id/file`, `/mcq-sets/:id/export` responses) and the `items/thread` query string
-// (`type`, `setId` + `number` or `noteId`), which dtos.md does not define as a schema.
+// dtos.md section 11. Not covered by a schema: the multipart `file` upload and the PDF streams
+// (`/documents/:id/file`, `/mcq-sets/:id/export` responses).
 export const ENDPOINTS = {
   health: {
     method: 'GET',
@@ -130,6 +132,7 @@ export const ENDPOINTS = {
     method: 'GET',
     path: '/topics/:topicId/items/thread',
     status: 200,
+    query: ItemThreadQuery,
     response: ThreadResponse,
   },
 

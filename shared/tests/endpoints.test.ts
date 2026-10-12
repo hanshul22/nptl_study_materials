@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ENDPOINTS } from '../src/endpoints.js';
+import { ItemThreadQuery } from '../src/schemas/ai.js';
 
 const entries = Object.entries(ENDPOINTS);
 
@@ -42,6 +43,12 @@ describe('ENDPOINTS', () => {
     expect(ENDPOINTS.deleteDocument.status).toBe(204);
     expect(ENDPOINTS.deleteNote.status).toBe(204);
     expect(ENDPOINTS.deleteMcqSet.status).toBe(204);
+  });
+
+  it('only the thread endpoint has a query schema, and it is ItemThreadQuery', () => {
+    const withQuery = entries.filter(([, e]) => 'query' in e).map(([name]) => name);
+    expect(withQuery).toEqual(['getItemThread']);
+    expect(ENDPOINTS.getItemThread.query).toBe(ItemThreadQuery);
   });
 
   it('request and response schemas parse real payloads', () => {

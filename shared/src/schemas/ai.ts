@@ -76,3 +76,15 @@ export const ThreadResponse = z.object({
   messages: z.array(ThreadMessage),
 });
 export type ThreadResponse = z.infer<typeof ThreadResponse>;
+
+// Query string of GET /topics/:topicId/items/thread. Query values arrive as strings, so
+// `number` is coerced. Strict objects reject keys that belong to the other variant.
+export const ItemThreadQuery = z.discriminatedUnion('type', [
+  z.strictObject({
+    type: z.literal('mcq'),
+    setId: ObjectIdStr,
+    number: z.coerce.number().int().min(1),
+  }),
+  z.strictObject({ type: z.literal('quickNote'), noteId: ObjectIdStr }),
+]);
+export type ItemThreadQuery = z.infer<typeof ItemThreadQuery>;
