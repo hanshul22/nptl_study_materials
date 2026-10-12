@@ -1,5 +1,5 @@
-import { describe, it } from 'vitest';
-import { DocumentDto, DocumentStatus } from '../src/schemas/documents.js';
+import { describe, expect, it } from 'vitest';
+import { DOCUMENT_FAILURE_CODES, DocumentDto, DocumentStatus } from '../src/schemas/documents.js';
 import { bad, DATE, ID, ID2, ok } from './helpers.js';
 
 describe('DocumentStatus', () => {
@@ -8,6 +8,34 @@ describe('DocumentStatus', () => {
     bad(DocumentStatus, 'done');
     bad(DocumentStatus, 'READY');
     bad(DocumentStatus, undefined);
+  });
+});
+
+describe('DOCUMENT_FAILURE_CODES', () => {
+  it('has exactly the five documented codes', () => {
+    expect([...DOCUMENT_FAILURE_CODES]).toEqual([
+      'PDF_ENCRYPTED',
+      'PDF_NO_TEXT',
+      'PDF_TOO_MANY_PAGES',
+      'INTERRUPTED',
+      'PROCESSING_FAILED',
+    ]);
+  });
+  it('does not narrow DocumentDto.errorCode: unknown codes still parse', () => {
+    const failed = {
+      id: ID,
+      topicId: ID2,
+      filename: 'a.pdf',
+      sizeBytes: 1,
+      pageCount: null,
+      chunkCount: 0,
+      status: 'failed',
+      errorCode: 'SOMETHING_NEW',
+      errorMessage: 'x',
+      createdAt: DATE,
+    };
+    ok(DocumentDto, failed);
+    for (const errorCode of DOCUMENT_FAILURE_CODES) ok(DocumentDto, { ...failed, errorCode });
   });
 });
 

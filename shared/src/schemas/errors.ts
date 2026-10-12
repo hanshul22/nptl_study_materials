@@ -9,6 +9,7 @@ export const ApiError = z.object({
         z.object({
           path: z.array(z.union([z.string(), z.number()])),
           message: z.string(),
+          code: z.string().optional(), // e.g. 'REFERENCE_NOT_FOUND'
         }),
       )
       .optional(),

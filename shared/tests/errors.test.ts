@@ -18,6 +18,25 @@ describe('ApiError', () => {
       },
     });
   });
+  it('accepts a details item with and without a code', () => {
+    const withoutCode = { path: ['questions', 0, 'answer'], message: 'bad answer' };
+    const withCode = {
+      path: ['questions', 1, 'reference', 'filename'],
+      message: 'No uploaded PDF named "Missing.pdf" in this topic',
+      code: 'REFERENCE_NOT_FOUND',
+    };
+    const envelope = (details: unknown[]) => ({
+      error: { code: 'MCQ_IMPORT_INVALID', message: 'Import failed', details },
+    });
+    ok(ApiError, envelope([withoutCode]));
+    ok(ApiError, envelope([withCode]));
+    ok(ApiError, envelope([withoutCode, withCode]));
+    expect(ApiError.parse(envelope([withCode])).error.details?.[0]?.code).toBe(
+      'REFERENCE_NOT_FOUND',
+    );
+    expect(ApiError.parse(envelope([withoutCode])).error.details?.[0]).not.toHaveProperty('code');
+    bad(ApiError, envelope([{ ...withCode, code: 5 }]));
+  });
   it('rejects missing code, message, or error wrapper', () => {
     bad(ApiError, { error: { message: 'x' } });
     bad(ApiError, { error: { code: 'X' } });
