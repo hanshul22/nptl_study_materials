@@ -8,6 +8,7 @@ import { notFound } from './middleware/notFound.js';
 import { owner } from './middleware/owner.js';
 import { generalRateLimiter } from './middleware/rateLimit.js';
 import { requestLogger } from './middleware/requestLogger.js';
+import { settingsRouter } from './routes/settings.routes.js';
 import { topicsRouter } from './routes/topics.routes.js';
 import { createLogger } from './utils/logger.js';
 
@@ -34,6 +35,7 @@ export function createApp(config: Config, options: { logger?: Logger } = {}): Ex
   });
 
   app.use('/api/v1', topicsRouter);
+  app.use('/api/v1', settingsRouter);
 
   app.use(notFound);
   app.use(errorHandler);
