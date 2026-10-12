@@ -1,11 +1,8 @@
 import { Route, Routes, useParams } from 'react-router-dom';
 import { Layout } from './components';
+import { TopicsPage } from './pages/TopicsPage';
 
-// Placeholders only. F1.4 to F1.6 replace these with the layout and real pages.
-function Topics() {
-  return <h1 className="text-2xl font-bold text-indigo-600">Topics</h1>;
-}
-
+// Placeholders only. F1.6 replaces the topic page with the real one.
 function Topic() {
   const { topicId, tab } = useParams();
   return (
@@ -19,7 +16,7 @@ export function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Topics />} />
+        <Route path="/" element={<TopicsPage />} />
         <Route path="/topics/:topicId/:tab?" element={<Topic />} />
         <Route path="/settings" element={<p>Settings placeholder</p>} />
         <Route path="*" element={<p>Page not found</p>} />
