@@ -8,6 +8,7 @@ import { notFound } from './middleware/notFound.js';
 import { owner } from './middleware/owner.js';
 import { generalRateLimiter } from './middleware/rateLimit.js';
 import { requestLogger } from './middleware/requestLogger.js';
+import { topicsRouter } from './routes/topics.routes.js';
 import { createLogger } from './utils/logger.js';
 
 export function createApp(config: Config, options: { logger?: Logger } = {}): Express {
@@ -31,6 +32,8 @@ export function createApp(config: Config, options: { logger?: Logger } = {}): Ex
   app.get('/api/v1/health', (_req, res) => {
     res.json({ status: 'ok' });
   });
+
+  app.use('/api/v1', topicsRouter);
 
   app.use(notFound);
   app.use(errorHandler);
